@@ -89,7 +89,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const deleteInvestment = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-investments/${id}`);
+    const res = await axios.delete(`${BASE_URL}delete-investment/${id}`);
     getInvestments();
   };
 
@@ -119,7 +119,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const deleteSaving = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-savings/${id}`);
+    const res = await axios.delete(`${BASE_URL}delete-saving/${id}`);
     getSavings();
   };
 
