@@ -1,22 +1,23 @@
-import React, {useState, useMemo} from 'react'
-import styled from 'styled-components';
-import bg from './img/bg.png';
-import { MainLayout } from './styles/Layouts';
-import Orb from './Components/Orb/Orb';
-import Navigation from './Components/Navigation/Navigation.js'
-import Dashboard from './Components/Dashboard/Dashboard.js'
-import Income from './Components/Incomes/Income.js'
-import Expenses from './Components/Expenses/Expenses.js'
-import Investments from './Components/Investments/Investments.js'
-import Savings from './Components/Savings/Savings.js'
-import { useGlobalContext } from './context/globalContext.js';
-
+import React, { useState, useMemo } from "react";
+import styled from "styled-components";
+import bg from "./img/bg.png";
+import { MainLayout } from "./styles/Layouts";
+import Orb from "./Components/Orb/Orb";
+import Navigation from "./Components/Navigation/Navigation.js";
+import Dashboard from "./Components/Dashboard/Dashboard.js";
+import Income from "./Components/Incomes/Income.js";
+import Expenses from "./Components/Expenses/Expenses.js";
+import Investments from "./Components/Investments/Investments.js";
+import Savings from "./Components/Savings/Savings.js";
+import { useGlobalContext } from "./context/globalContext.js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signin from "./pages/Sign-in.js";
+import Signup from "./pages/Sign-up.js";
 function App() {
-  const [active, setActive] = useState(1)
+  const [active, setActive] = useState(1);
 
-  const global = useGlobalContext()
-  console.log(global)
-
+  const global = useGlobalContext();
+  console.log(global);
 
   const displayData = () => {
     switch (active) {
@@ -38,16 +39,24 @@ function App() {
   };
 
   const orbMemo = useMemo(() => {
-    return <Orb />
-  },[])
+    return <Orb />;
+  }, []);
 
   return (
     <AppStyled bg={bg} className="App">
-      {orbMemo}
+      <Orb />
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
-          {displayData()}
+          <Routes>
+            <Route exact path="/" element={<Dashboard />} />{" "}
+            <Route exact path="/Incomes" element={<Income />} />{" "}
+            <Route exact path="/" element={<Dashboard />} />{" "}
+            <Route exact path="/" element={<Dashboard />} />{" "}
+            <Route exact path="/" element={<Dashboard />} />{" "}
+            <Route path="/signup" element={<Signup />} />{" "}
+            <Route path="/signin" element={<Signin />} />{" "}
+          </Routes>
         </main>
       </MainLayout>
     </AppStyled>
@@ -70,6 +79,5 @@ const AppStyled = styled.div`
     }
   }
 `;
-
 
 export default App;

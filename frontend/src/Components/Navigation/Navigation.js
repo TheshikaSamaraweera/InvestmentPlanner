@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import avatar from "../../img/avatar.png";
 import { signout } from "../../utils/icons";
 import { menuItems } from "../../utils/menuItems";
+import { Link } from "react-router-dom";
 
 function Navigation({ active, setActive }) {
+  const handleSignout = () => {
+    // Implement signout logic here
+    console.log("User signed out");
+  };
+
   return (
     <NavStyled>
+      {/* Your user profile section */}
       <div className="user-con">
         <img src={avatar} alt="" />
         <div className="text">
           <h2>Test User</h2>
-          <p2>Money</p2>
+          <p>Money</p> {/* Changed p2 to p */}
         </div>
       </div>
+      {/* Navigation menu */}
       <ul className="menu-items">
-        {menuItems.map((item) => {
-          return (
-            <li
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              className={active === item.id ? "active" : ""}
-            >
+        {menuItems.map((item) => (
+          <li
+            key={item.id}
+            onClick={() => setActive(item.id)}
+            className={active === item.id ? "active" : ""}
+          >
+            <Link to={item.link}>
               {item.icon}
               <span>{item.title}</span>
-            </li>
-          );
-        })}
+            </Link>
+          </li>
+        ))}
       </ul>
+
       <div className="bottom-nav">
-        <li>{signout} Sign Out</li>
+        <button onClick={handleSignout}>{signout} Sign Out</button>{" "}
       </div>
     </NavStyled>
   );
@@ -108,6 +117,25 @@ const NavStyled = styled.div`
       background: #222260;
       border-radius: 0 10px 10px 0;
     }
+  }
+  .bottom-nav {
+    margin-top: auto; /* Align at the bottom */
+  }
+
+  .bottom-nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .bottom-nav button:hover {
+    color: #ff0000; /* Example color change on hover */
   }
 `;
 export default Navigation;
