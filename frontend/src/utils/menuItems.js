@@ -1,36 +1,58 @@
-import {dashboard, expenses, transactions, trend, investments, savings} from '../utils/icons'
+// menuItems.js
+
+import {
+  dashboard,
+  expenses,
+  transactions,
+  trend,
+  investments,
+  savings,
+  signup,
+  signin,
+} from "../utils/icons";
 
 export const menuItems = [
-    {
-        id : 1,
-        title : 'Dashboard',
-        icon : dashboard,
-        link : '/dashboard'
-    },
-    {
-        id : 3,
-        title : 'Incomes',
-        icon : trend,
-        link : '/dashboard'
-    },
-    {
-        id : 4,
-        title : 'Expenses',
-        icon : expenses,
-        link : '/dashboard'
-    },
-    {
-        id : 5,
-        title : 'Investments',
-        icon : investments,
-        link : '/dashboard'
-    },
-    {
-        id : 6,
-        title : 'Savings',
-        icon : savings,
-        link : '/dashboard'
-    }
+  {
+    id: 1,
+    title: "Dashboard",
+    icon: dashboard,
+    link: "/",
+  },
 
-
-]
+  {
+    id: 2,
+    title: "Incomes",
+    icon: trend,
+    link: "/Incomes",
+  },
+  {
+    id: 3,
+    title: "Expenses",
+    icon: expenses,
+    link: "/Expenses",
+  },
+  {
+    id: 4,
+    title: "Investments",
+    icon: investments,
+    link: "/Investments",
+  },
+  {
+    id: 5,
+    title: "Savings",
+    icon: savings,
+    link: "/Savings",
+  },
+  {
+    id: 6,
+    title: "Sign Up",
+    icon: signup,
+    link: "/signup",
+  },
+  {
+    id: 7,
+    title: "Sign In",
+    icon: signin,
+    link: "/signin",
+  },
+];
