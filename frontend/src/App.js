@@ -54,8 +54,7 @@ function App() {
             <Route exact path="/Expenses" element={<Expenses />} />{" "}
             <Route exact path="/Investments" element={<Investments />} />{" "}
             <Route exact path="/Savings" element={<Savings />} />{" "}
-            <Route path="/signup" element={<Signup />} />{" "}
-            <Route path="/signin" element={<Signin />} />{" "}
+            
           </Routes>
         </main>
       </MainLayout>

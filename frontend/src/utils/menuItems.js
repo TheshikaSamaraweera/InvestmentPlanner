@@ -43,16 +43,16 @@ export const menuItems = [
     icon: savings,
     link: "/Savings",
   },
-  {
-    id: 6,
-    title: "Sign Up",
-    icon: signup,
-    link: "/signup",
-  },
-  {
-    id: 7,
-    title: "Sign In",
-    icon: signin,
-    link: "/signin",
-  },
+  // {
+  //   id: 6,
+  //   title: "Sign Up",
+  //   icon: signup,
+  //   link: "/signup",
+  // },
+  // {
+  //   id: 7,
+  //   title: "Sign In",
+  //   icon: signin,
+  //   link: "/signin",
+  // },
 ];
