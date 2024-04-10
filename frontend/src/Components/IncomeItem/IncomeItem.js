@@ -18,6 +18,7 @@ import {
   stocks,
   takeaway,
   trash,
+  edit,
   tv,
   users,
   yt,
@@ -149,7 +150,20 @@ function IncomeItem({
               {description}
             </p>
           </div>
+
           <div className="btn-con">
+
+          <Button
+              icon={edit}
+              bPad={"1rem"}
+              bRad={"50%"}
+              bg={"var(--primary-color)" }
+              color={"#fff"}
+              iColor={"#fff"}
+              hColor={"var(--color-green)"}
+              onClick={() => deleteItem(id)}
+            />
+
             <Button
               icon={trash}
               bPad={"1rem"}
@@ -214,6 +228,13 @@ const IncomeItemStyled = styled.div`
         background: ${(props) => props.indicator};
       }
     }
+
+  .btn-con{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem
+  }
 
     .inner-content {
       display: flex;
