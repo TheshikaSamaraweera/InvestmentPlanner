@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import { InnerLayout } from "../../styles/Layouts";
 import Form from "../Form/Form";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import SavingItem from "../IncomeItem/SavingItem";
 import SavingForm from "./SavingForm";
 
 function Savings() {
@@ -30,7 +30,7 @@ function Savings() {
                 income;
               console.log(income);
               return (
-                <IncomeItem
+                <SavingItem
                   key={_id}
                   id={_id}
                   title={title}

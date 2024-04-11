@@ -48,22 +48,37 @@ exports.deleteSaving = async (req, res) => {
 };
 
 exports.updateSaving = async (req, res) => {
+  console.log("🚀 ~ exports.updateSaving= ~ req:", req.body);
   const { id } = req.params;
   const updateData = req.body;
+
+  if (!id) {
+    return res.status(400).json({ msg: "Missing saving ID" });
+  }
+
   try {
+    // Using 'new: true' to return the updated document and 'runValidators: true' to apply schema validations on update
     const updatedSaving = await SavingSchema.findByIdAndUpdate(id, updateData, {
       new: true,
+      runValidators: true,
     });
 
     if (!updatedSaving) {
       return res.status(404).json({ msg: "Saving not found" });
     }
 
-    return res
-      .status(200)
-      .json({ msg: "Saving updated successfully", saving: updatedSaving });
+    return res.status(200).json({
+      msg: "Saving updated successfully",
+      saving: updatedSaving,
+    });
   } catch (err) {
     console.error("Error updating saving:", err);
+    // Handling specific Mongoose error codes here if needed
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ msg: "Validation Error", errors: err.errors });
+    }
     return res.status(500).json({ msg: "Server Error" });
   }
 };

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5005/api/v1/";
+const BASE_URL = "http://localhost:5000/api/v1/";
 
 const GlobalContext = React.createContext();
 
@@ -57,6 +57,16 @@ export const GlobalProvider = ({ children }) => {
     getExpenses();
   };
 
+   const updateExpense = async (expense) => {
+     const response = await axios
+       .put(`${BASE_URL}update-expense/${expense.id}`, expense)
+       .catch((err) => {
+         setError(err.response.data.message);
+         console.log("🚀 ~ updateExpense ~ response:", response);
+       });
+     return "success";
+   };
+
   const getExpenses = async () => {
     const response = await axios.get(`${BASE_URL}get-expenses`);
     setExpenses(response.data);
@@ -85,6 +95,16 @@ export const GlobalProvider = ({ children }) => {
     getInvestments();
   };
 
+   const updateInvestment = async (investment) => {
+     const response = await axios
+       .put(`${BASE_URL}update-investment/${investment.id}`, investment)
+       .catch((err) => {
+         setError(err.response.data.message);
+         console.log("🚀 ~ updateInvestment ~ response:", response);
+       });
+     return "success";
+   };
+
   const getInvestments = async () => {
     const response = await axios.get(`${BASE_URL}get-investments`);
     setInvestments(response.data);
@@ -112,6 +132,16 @@ export const GlobalProvider = ({ children }) => {
     });
     getSavings();
   };
+
+   const updateSaving = async (saving) => {
+     const response = await axios
+       .put(`${BASE_URL}update-saving/${saving.id}`, saving)
+       .catch((err) => {
+         setError(err.response.data.message);
+         console.log("🚀 ~ updateSaving ~ response:", response);
+       });
+     return "success";
+   };
 
   const getSavings = async () => {
     const response = await axios.get(`${BASE_URL}get-savings`);
@@ -157,14 +187,17 @@ export const GlobalProvider = ({ children }) => {
         expenses,
         totalIncome,
         addExpense,
+        updateExpense,
         getExpenses,
         deleteExpense,
         totalExpenses,
         addInvestment,
+        updateInvestment,
         getInvestments,
         deleteInvestment,
         totalInvestments,
         addSaving,
+        updateSaving,
         getSavings,
         deleteSaving,
         totalSavings,

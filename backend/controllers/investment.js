@@ -47,14 +47,20 @@ exports.deleteInvestment = async (req, res) => {
 };
 
 exports.updateInvestment = async (req, res) => {
+  console.log("🚀 ~ exports.updateInvestment= ~ req:", req.body);
   const { id } = req.params;
   const updateData = req.body;
+
+  if (!id) {
+    return res.status(400).json({ msg: "Missing investment ID" });
+  }
+
   try {
-    const updatedInvestment = await InvestmentSchema.findByIdAndUpdate(
-      id,
-      updateData,
-      { new: true }
-    );
+    // Using 'new: true' to return the updated document and 'runValidators: true' to apply schema validations on update
+    const updatedInvestment = await InvestmentSchema.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedInvestment) {
       return res.status(404).json({ msg: "Investment not found" });
@@ -66,6 +72,13 @@ exports.updateInvestment = async (req, res) => {
     });
   } catch (err) {
     console.error("Error updating investment:", err);
+    // Handling specific Mongoose error codes here if needed
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ msg: "Validation Error", errors: err.errors });
+    }
     return res.status(500).json({ msg: "Server Error" });
   }
 };
+

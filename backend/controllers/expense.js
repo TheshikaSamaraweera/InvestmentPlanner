@@ -49,24 +49,37 @@ exports.deleteExpense = async (req, res) => {
 };
 
 exports.updateExpense = async (req, res) => {
+  console.log("🚀 ~ exports.updateExpense= ~ req:", req.body);
   const { id } = req.params;
   const updateData = req.body;
+
+  if (!id) {
+    return res.status(400).json({ msg: "Missing expense ID" });
+  }
+
   try {
-    const updatedExpense = await ExpenseSchema.findByIdAndUpdate(
-      id,
-      updateData,
-      { new: true }
-    );
+    // Using 'new: true' to return the updated document and 'runValidators: true' to apply schema validations on update
+    const updatedExpense = await ExpenseSchema.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedExpense) {
       return res.status(404).json({ msg: "Expense not found" });
     }
 
-    return res
-      .status(200)
-      .json({ msg: "Expense updated successfully", expense: updatedExpense });
+    return res.status(200).json({
+      msg: "Expense updated successfully",
+      expense: updatedExpense,
+    });
   } catch (err) {
     console.error("Error updating expense:", err);
+    // Handling specific Mongoose error codes here if needed
+    if (err.name === "ValidationError") {
+      return res
+        .status(400)
+        .json({ msg: "Validation Error", errors: err.errors });
+    }
     return res.status(500).json({ msg: "Server Error" });
   }
 };

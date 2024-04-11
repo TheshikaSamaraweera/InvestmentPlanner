@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import { InnerLayout } from "../../styles/Layouts";
 import Form from "../Form/Form";
-import IncomeItem from "../IncomeItem/IncomeItem";
+import ExpenseItem from "../IncomeItem/ExpenseItem";
 import ExpenseForm from "./ExpenseForm";
 
 function Expenses() {
@@ -29,7 +29,7 @@ function Expenses() {
               const { _id, title, amount, date, category, description, type } =
                 income;
               return (
-                <IncomeItem
+                <ExpenseItem
                   key={_id}
                   id={_id}
                   title={title}
