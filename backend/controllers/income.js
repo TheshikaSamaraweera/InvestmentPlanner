@@ -50,23 +50,35 @@ exports.deleteIncome = async (req, res) => {
 };
 
 exports.updateIncome = async (req, res) => {
+  console.log("🚀 ~ exports.updateIncome= ~ req:", req.body);
   const { id } = req.params;
   const updateData = req.body;
 
+  if (!id) {
+    return res.status(400).json({ msg: "Missing income ID" });
+  }
+
   try {
+    // Using 'new: true' to return the updated document and 'runValidators: true' to apply schema validations on update
     const updatedIncome = await IncomeSchema.findByIdAndUpdate(id, updateData, {
       new: true,
+      runValidators: true,
     });
 
     if (!updatedIncome) {
       return res.status(404).json({ msg: "Income not found" });
     }
 
-    return res
-      .status(200)
-      .json({ msg: "Income updated successfully", income: updatedIncome });
+    return res.status(200).json({
+      msg: "Income updated successfully",
+      income: updatedIncome,
+    });
   } catch (err) {
     console.error("Error updating income:", err);
+    // Handling specific Mongoose error codes here if needed
+    if (err.name === "ValidationError") {
+      return res.status(400).json({ msg: "Validation Error", errors: err.errors });
+    }
     return res.status(500).json({ msg: "Server Error" });
   }
 };

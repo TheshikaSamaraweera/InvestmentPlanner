@@ -1,36 +1,31 @@
-const { addIncome, getIncomes, deleteIncome, updateIncome } = require('../controllers/income');  
-const { addExpense, getExpenses, deleteExpense, updateExpense } = require('../controllers/expense'); 
-const { addSaving, getSavings, deleteSaving, updateSaving } = require('../controllers/saving'); 
-const { addInvestment, getInvestments, deleteInvestment, updateInvestment} = require('../controllers/investment');
-const router = require('express').Router()
+const { addIncome, getIncomes, deleteIncome, updateIncome } = require("../controllers/income");
+const { addExpense, getExpenses, deleteExpense, updateExpense } = require("../controllers/expense");
+const { addSaving, getSavings, deleteSaving, updateSaving } = require("../controllers/saving");
+const { addInvestment, getInvestments, deleteInvestment, updateInvestment } = require("../controllers/investment");
+const router = require("express").Router();
 
 //Income Routes
-router.post('/add-income', addIncome) 
-router.get('/get-incomes', getIncomes)
-router.delete('/delete-income/:id', deleteIncome)
-router.put('/update-income/:id', updateIncome)
-
+router.post("/add-income", addIncome);
+router.get("/get-incomes", getIncomes);
+router.delete("/delete-income/:id", deleteIncome);
+router.put("/update-income/:id", updateIncome);
 
 //Expense Routes
-router.post('/add-expense', addExpense)
-router.get('/get-expenses', getExpenses)
-router.delete('/delete-expense/:id', deleteExpense)
-router.put('/update-expense/:id', updateExpense)
-
+router.post("/add-expense", addExpense);
+router.get("/get-expenses", getExpenses);
+router.delete("/delete-expense/:id", deleteExpense);
+router.put("/update-expense/:id", updateExpense);
 
 //Saving Routes
-router.post('/add-saving', addSaving)
-router.get('/get-savings', getSavings)
-router.delete('/delete-saving/:id', deleteSaving)
-router.put('/update-saving/:id', updateSaving)
-
+router.post("/add-saving", addSaving);
+router.get("/get-savings", getSavings);
+router.delete("/delete-saving/:id", deleteSaving);
+router.put("/update-saving/:id", updateSaving);
 
 //Investment Routes
-router.post('/add-investment', addInvestment)
-router.get('/get-investments', getInvestments)
-router.delete('/delete-investment/:id', deleteInvestment)
-router.put('/update-investment/:id', updateInvestment)
+router.post("/add-investment", addInvestment);
+router.get("/get-investments", getInvestments);
+router.delete("/delete-investment/:id", deleteInvestment);
+router.put("/update-investment/:id", updateInvestment);
 
-
-module.exports = router
-
+module.exports = router;
