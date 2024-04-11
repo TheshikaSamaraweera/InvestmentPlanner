@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api/v1/";
+const BASE_URL = "http://localhost:5005/api/v1/";
 
 const GlobalContext = React.createContext();
 
@@ -15,12 +15,18 @@ export const GlobalProvider = ({ children }) => {
   //calculate incomes
   const addIncome = async (income) => {
     console.log(income);
-    const response = await axios
-      .post(`${BASE_URL}add-income`, income)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
+    const response = await axios.post(`${BASE_URL}add-income`, income).catch((err) => {
+      setError(err.response.data.message);
+    });
     getIncomes();
+  };
+
+  const updateIncome = async (income) => {
+    const response = await axios.put(`${BASE_URL}update-income/${income.id}`, income).catch((err) => {
+      setError(err.response.data.message);
+      console.log("🚀 ~ updateIncome ~ response:", response);
+    });
+    return "success";
   };
 
   const getIncomes = async () => {
@@ -45,11 +51,9 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate expenses
   const addExpense = async (expense) => {
-    const response = await axios
-      .post(`${BASE_URL}add-expense`, expense)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
+    const response = await axios.post(`${BASE_URL}add-expense`, expense).catch((err) => {
+      setError(err.response.data.message);
+    });
     getExpenses();
   };
 
@@ -75,11 +79,9 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate investments
   const addInvestment = async (investment) => {
-    const response = await axios
-      .post(`${BASE_URL}add-investment`, investment)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
+    const response = await axios.post(`${BASE_URL}add-investment`, investment).catch((err) => {
+      setError(err.response.data.message);
+    });
     getInvestments();
   };
 
@@ -105,11 +107,9 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate savings
   const addSaving = async (saving) => {
-    const response = await axios
-      .post(`${BASE_URL}add-saving`, saving)
-      .catch((err) => {
-        setError(err.response.data.message);
-      });
+    const response = await axios.post(`${BASE_URL}add-saving`, saving).catch((err) => {
+      setError(err.response.data.message);
+    });
     getSavings();
   };
 
@@ -134,9 +134,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const totalBalance = () => {
-    return (
-      totalIncome() - (totalExpenses() + totalInvestments() + totalSavings())
-    );
+    return totalIncome() - (totalExpenses() + totalInvestments() + totalSavings());
   };
 
   const transactionHistory = () => {
@@ -152,6 +150,7 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         addIncome,
+        updateIncome,
         getIncomes,
         incomes,
         deleteIncome,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { dateFormat } from "../../utils/dateFormat";
 import {
@@ -23,19 +23,44 @@ import {
   users,
   yt,
 } from "../../utils/icons";
+import EditModal from "../UpdateIncome/updateIncome";
 import Button from "../Button/Button";
+import { useGlobalContext } from "../../context/globalContext";
+import Swal from "sweetalert2";
 
-function IncomeItem({
-  id,
-  title,
-  amount,
-  date,
-  category,
-  description,
-  deleteItem,
-  indicatorColor,
-  type,
-}) {
+function IncomeItem({ id, title, amount, date, category, description, deleteItem, indicatorColor, type }) {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { updateIncome, setError } = useGlobalContext();
+
+  const handleEdit = () => {
+    setModalOpen(true);
+  };
+  const handleClose = () => {
+    setModalOpen(false);
+  };
+  const handleUpdate = async (updatedItem) => {
+    const result = await updateIncome(updatedItem).catch((err) => {
+      console.error("Update failed:", err);
+      setError(err.response?.data.message || "Failed to update income.");
+    });
+
+    if (result === "success") {
+      Swal.fire({
+        title: "Success!",
+        text: "Income updated successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload(); // Refresh the page after clicking OK
+        }
+      });
+      handleClose();
+    } else {
+      console.error("Failed to update item:", updatedItem);
+    }
+  };
+
   const categoryIcon = () => {
     switch (category) {
       case "salary":
@@ -131,53 +156,58 @@ function IncomeItem({
   console.log("type", type);
 
   return (
-    <IncomeItemStyled indicator={indicatorColor}>
-      <div className="icon">
-        {type === "expense" ? expenseCatIcon() : categoryIcon()}
-      </div>
-      <div className="content">
-        <h5>{title}</h5>
-        <div className="inner-content">
-          <div className="text">
-            <p>
-              {dollar} {amount}
-            </p>
-            <p>
-              {calender} {dateFormat(date)}
-            </p>
-            <p>
-              {comment}
-              {description}
-            </p>
-          </div>
+    <>
+      {" "}
+      <IncomeItemStyled indicator={indicatorColor}>
+        <div className="icon">{type === "expense" ? expenseCatIcon() : categoryIcon()}</div>
+        <div className="content">
+          <h5>{title}</h5>
+          <div className="inner-content">
+            <div className="text">
+              <p>
+                {dollar} {amount}
+              </p>
+              <p>
+                {calender} {dateFormat(date)}
+              </p>
+              <p>
+                {comment}
+                {description}
+              </p>
+            </div>
 
-          <div className="btn-con">
-
-          <Button
-              icon={edit}
-              bPad={"1rem"}
-              bRad={"50%"}
-              bg={"var(--primary-color)" }
-              color={"#fff"}
-              iColor={"#fff"}
-              hColor={"var(--color-green)"}
-              onClick={() => deleteItem(id)}
-            />
-
-            <Button
-              icon={trash}
-              bPad={"1rem"}
-              bRad={"50%"}
-              bg={"var(--primary-color)" }
-              color={"#fff"}
-              iColor={"#fff"}
-              hColor={"var(--color-green)"}
-              onClick={() => deleteItem(id)}
-            />
+            <div className="btn-con">
+              <Button
+                icon={edit}
+                bPad={"1rem"}
+                bRad={"50%"}
+                bg={"var(--primary-color)"}
+                color={"#fff"}
+                iColor={"#fff"}
+                hColor={"var(--color-green)"}
+                onClick={handleEdit}
+              />
+              <Button
+                icon={trash}
+                bPad={"1rem"}
+                bRad={"50%"}
+                bg={"var(--primary-color)"}
+                color={"#fff"}
+                iColor={"#fff"}
+                hColor={"var(--color-green)"}
+                onClick={() => deleteItem(id)}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </IncomeItemStyled>
+      </IncomeItemStyled>
+      <EditModal
+        isOpen={isModalOpen}
+        onClose={handleClose}
+        item={{ id, title, amount, date, category, description }}
+        onUpdate={handleUpdate}
+      />
+    </>
   );
 }
 
@@ -229,12 +259,12 @@ const IncomeItemStyled = styled.div`
       }
     }
 
-  .btn-con{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem
-  }
+    .btn-con {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
 
     .inner-content {
       display: flex;
