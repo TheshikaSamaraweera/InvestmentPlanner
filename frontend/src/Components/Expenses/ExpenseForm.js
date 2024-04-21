@@ -109,6 +109,16 @@ function ExpenseForm() {
           color={"#fff"}
         />
       </div>
+      <div className="gpt-btn">
+        <Button
+          name={"Generate Recommendations"}
+          icon={plus}
+          bPad={".8rem 1.6rem"}
+          bRad={"30px"}
+          bg={"var(--color-accent"}
+          color={"#fff"}
+        />
+      </div>
     </ExpenseFormStyled>
   );
 }

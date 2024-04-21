@@ -28,4 +28,12 @@ router.get("/get-investments", getInvestments);
 router.delete("/delete-investment/:id", deleteInvestment);
 router.put("/update-investment/:id", updateInvestment);
 
+//GPT Recommendation
+router.post("/recommendation", async (req, res) => {
+  const { category, amount } = req.body;
+    const recommendation = await getRecommendation(category, amount);
+    res.json(recommendation);
+});
+
+
 module.exports = router;
