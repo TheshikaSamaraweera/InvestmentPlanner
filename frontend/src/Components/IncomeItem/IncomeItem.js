@@ -9,7 +9,7 @@ import {
   circle,
   clothing,
   comment,
-  dollar,
+  LKR,
   food,
   freelance,
   medical,
@@ -159,13 +159,15 @@ function IncomeItem({ id, title, amount, date, category, description, deleteItem
     <>
       {" "}
       <IncomeItemStyled indicator={indicatorColor}>
-        <div className="icon">{type === "expense" ? expenseCatIcon() : categoryIcon()}</div>
+        <div className="icon">
+          {type === "expense" ? expenseCatIcon() : categoryIcon()}
+        </div>
         <div className="content">
           <h5>{title}</h5>
           <div className="inner-content">
             <div className="text">
               <p>
-                {dollar} {amount}
+                LKR {amount}
               </p>
               <p>
                 {calender} {dateFormat(date)}

@@ -18,7 +18,7 @@ function Savings() {
       <InnerLayout>
         <h1>Savings</h1>
         <h2 className="total-income">
-          Total Saving: <span>${totalSavings()}</span>
+          Total Saving: <span>LKR{totalSavings()}</span>
         </h2>
         <div className="income-content">
           <div className="form-container">

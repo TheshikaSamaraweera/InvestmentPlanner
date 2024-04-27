@@ -9,7 +9,7 @@ import {
   circle,
   clothing,
   comment,
-  dollar,
+  LKR,
   food,
   freelance,
   medical,
@@ -177,7 +177,7 @@ function ExpenseItem({
           <div className="inner-content">
             <div className="text">
               <p>
-                {dollar} {amount}
+                LKR {amount}
               </p>
               <p>
                 {calender} {dateFormat(date)}
