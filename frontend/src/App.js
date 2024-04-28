@@ -49,12 +49,13 @@ function App() {
         <Navigation active={active} setActive={setActive} />
         <main>
           <Routes>
-            <Route exact path="/" element={<Dashboard />} />{" "}
+            <Route exact path="/Dashboard" element={<Dashboard />} />{" "}
             <Route exact path="/Incomes" element={<Income />} />{" "}
             <Route exact path="/Expenses" element={<Expenses />} />{" "}
             <Route exact path="/Investments" element={<Investments />} />{" "}
             <Route exact path="/Savings" element={<Savings />} />{" "}
-            
+            <Route exact path="/" element={<Signin />} />{" "}
+            <Route exact path="/Sign-up" element={<Signup />} />{" "}
           </Routes>
         </main>
       </MainLayout>
