@@ -4,12 +4,17 @@ import avatar from "../../img/avatar.png";
 import { signout } from "../../utils/icons";
 import { menuItems } from "../../utils/menuItems";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../../context/globalContext";
 
 function Navigation({ active, setActive }) {
+  const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
   const handleSignout = () => {
     // Implement signout logic here
     console.log("User signed out");
+    setIsAuthenticated(false);
   };
+
+  if (!isAuthenticated) return null;
 
   return (
     <NavStyled>

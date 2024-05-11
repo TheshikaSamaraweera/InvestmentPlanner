@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/globalContext";
 
 const SignIn = ({}) => {
+  const { setIsAuthenticated } = useGlobalContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
@@ -17,6 +19,7 @@ const SignIn = ({}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/");
+    setIsAuthenticated(true);
   };
 
   return (
@@ -44,6 +47,10 @@ const SignIn = ({}) => {
         <button type="submit" style={styles.button}>
           Sign In
         </button>
+
+        <Link to="/Sign-up">
+          <p>Don't have an account? Sign Up</p>
+        </Link>
       </form>
     </div>
   );

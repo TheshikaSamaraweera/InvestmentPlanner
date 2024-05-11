@@ -13,6 +13,7 @@ import { useGlobalContext } from "./context/globalContext.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signin from "./pages/Sign-in.js";
 import Signup from "./pages/Sign-up.js";
+
 function App() {
   const [active, setActive] = useState(1);
 

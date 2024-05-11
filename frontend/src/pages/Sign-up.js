@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/globalContext";
 
 const SignUp = () => {
+  const {setIsAuthenticated} = useGlobalContext();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,10 +20,14 @@ const SignUp = () => {
       setUsername("");
       setEmail("");
       setPassword("");
+      setIsAuthenticated(true);
+      navigate("/Dashboard");
     } else {
       setSignUpMessage("Please fill out all fields.");
     }
   };
+
+  //new comment
 
   return (
     <div style={styles.container}>
