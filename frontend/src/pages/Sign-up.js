@@ -23,9 +23,9 @@ const styles = {
     flex: 2,
     display: "flex",
     flexDirection: "column",
-    paddingLeft: "80px",
+    paddingLeft: "70px",
     justifyContent: "center",
-    backgroundColor: "#3bb19b",
+    backgroundColor: "#FF69B4",
     borderTopLeftRadius: "10px",
     borderBottomLeftRadius: "10px",
   },
@@ -34,6 +34,7 @@ const styles = {
     color: "white",
     fontSize: "35px",
     alignSelf: "center",
+    
   },
   right: {
     flex: 1,
@@ -43,6 +44,7 @@ const styles = {
     backgroundColor: "#ffffff",
     borderTopRightRadius: "10px",
     borderBottomRightRadius: "10px",
+    padding:"70px"
   },
   formContainer: {
     display: "flex",
@@ -86,7 +88,7 @@ const styles = {
     cursor: "pointer",
   },
   greenBtn: {
-    backgroundColor: "#369FFF",
+    backgroundColor: "#FF69B4",
     color: "white",
     border: "none",
     outline: "none",
